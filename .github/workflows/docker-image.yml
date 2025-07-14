@@ -48,9 +48,9 @@ jobs:
           debug: true
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
-            docker stop myapp || true
-            docker rm myapp || true
-            docker run -d --name myapp -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
+            docker stop demo || true
+            docker rm demo || true
+            docker run -d --name demo -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/my-node-app:latest
 
       - name: ✅ Done
         run: echo "🚀 Deployment to EC2 completed successfully!"
