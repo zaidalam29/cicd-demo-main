@@ -5,7 +5,7 @@ const { chromium } = require('playwright');
   const page = await browser.newPage();
 
   // 1. Open the website
-  await page.goto('https://www.geevahtrading.com/', { waitUntil: 'load' });
+  await page.goto('https://www.xyz.com/', { waitUntil: 'load' });
 
   // 2. Click on LOGIN button (top-right)
   await page.waitForSelector('a[href*="account/login"]'); // Make sure login link is visible
@@ -15,8 +15,8 @@ const { chromium } = require('playwright');
   await page.waitForSelector('input[name="email"]');
 
   // 4. Fill email and password
-  await page.fill('input[name="email"]', 'bsk.badshahkhan@gmail.com');
-  await page.fill('input[name="password"]', '12345678');
+  await page.fill('input[name="email"]', 'badshahkhan123@gmail.com');
+  await page.fill('input[name="password"]', '123123123');
 
   // 5. Click Login button
   await page.click('button[type="submit"]');
