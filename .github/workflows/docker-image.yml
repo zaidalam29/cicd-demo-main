@@ -1,38 +1,18 @@
-name: Node.js CI/CD - Without PM2
+name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "Main" ]
+  pull_request:
+    branches: [ "Main" ]
 
 jobs:
-  deploy:
+
+  build:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Decode SSH Key
-        run: |
-          echo "${{ secrets.EC2_SSH_KEY }}" | base64 -d > key.pem
-          chmod 600 key.pem
-
-      - name: Deploy to EC2 and start app
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            # Go to project folder
-            cd ~/my-node-app
-
-            # Pull latest code
-            git pull origin main
-
-            # Install dependencies
-            npm install
-
-            # Kill previous node process if running
-            pkill -f "node index.js" || true
-
-            # Run the app without pm2 (in background using nohup)
-            nohup node index.js > output.log 2>&1 &
-          EOF
- 
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
