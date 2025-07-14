@@ -35,3 +35,4 @@ jobs:
             # Run the app without pm2 (in background using nohup)
             nohup node index.js > output.log 2>&1 &
           EOF
+ 
